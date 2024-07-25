@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaInstagram, FaGithub } from 'react-icons/fa';
+import Image from 'next/image';
 
 const About = () => {
     return (
@@ -10,7 +11,7 @@ const About = () => {
                 <section className="mb-16">
                     <h2 className="text-4xl font-semibold mb-6 text-gray-200">Our Mission</h2>
                     <p className="leading-relaxed text-lg text-gray-300">
-                        Welcome to Get Me A Chai! Our mission is to help creators get the support they need to keep creating amazing content. Whether you're an artist, writer, musician, or any kind of creator, our platform offers you the tools to connect with your audience and monetize your passion.
+                        Welcome to Get Me A Chai! Our mission is to help creators get the support they need to keep creating amazing content. Whether you&apos;re an artist, writer, musician, or any kind of creator, our platform offers you the tools to connect with your audience and monetize your passion.
                     </p>
                 </section>
 
@@ -29,10 +30,12 @@ const About = () => {
                     <h2 className="text-4xl font-semibold mb-6 text-gray-200">Meet the Team</h2>
                     <div className="flex flex-wrap justify-center">
                         <div className="w-72 p-6 m-4 bg-gray-800 rounded-xl shadow-xl transition-transform transform hover:scale-105">
-                            <img
+                            <Image
                                 className='rounded-full w-32 h-32 mx-auto mb-4 border-4 border-blue-500'
                                 src="/vasu.jpg"
                                 alt="Vasu Sharma"
+                                width={128}
+                                height={128}
                             />
                             <h3 className="text-2xl font-semibold text-center text-gray-100">Vasu Sharma</h3>
                             <p className="text-center text-gray-400">Developer</p>
