@@ -1,26 +1,35 @@
-"use client"
-import React, { useState, useEffect } from 'react'
-import Script from 'next/script'
-import { fetchuser, fetchpayments, initiate } from '@/actions/useractions'
-import { useSession } from 'next-auth/react'
-import { useSearchParams } from 'next/navigation'
+"use client";
+import React, { useState, useEffect } from 'react';
+import Script from 'next/script';
+import { fetchuser, fetchpayments, initiate } from '@/actions/useractions';
+import { useSession } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Bounce } from 'react-toastify'
+import { Bounce } from 'react-toastify';
+import Image from 'next/image';
 
 const PaymentPage = ({ username }) => {
   const { data: session } = useSession();
   const [paymentform, setPaymentform] = useState({});
-  const [currentUser, setcurrentUser] = useState({})
-  const [payments, setPayments] = useState([])
-  const searchParams = useSearchParams()
-  
-  useEffect(() => {
-    getData()
-  }, [])
+  const [currentUser, setcurrentUser] = useState({});
+  const [payments, setPayments] = useState([]);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (searchParams.get("paymentdone") == "true") {
+    const getData = async () => {
+      let u = await fetchuser(username);
+      setcurrentUser(u);
+
+      let dbpayments = await fetchpayments(username);
+      setPayments(dbpayments);
+    };
+
+    getData();
+  }, [username]);
+
+  useEffect(() => {
+    if (searchParams.get("paymentdone") === "true") {
       toast('Thanks for your donation!', {
         position: "top-right",
         autoClose: 5000,
@@ -33,21 +42,11 @@ const PaymentPage = ({ username }) => {
         transition: Bounce,
       });
     }
-  }, [searchParams])
-
+  }, [searchParams]);
 
   const handleChange = (e) => {
     setPaymentform({ ...paymentform, [e.target.name]: e.target.value });
   };
-
-  const getData = async () => {
-
-    let u = await fetchuser(username)
-    setcurrentUser(u)
-
-    let dbpayments = await fetchpayments(username)
-    setPayments(dbpayments)
-  }
 
   const pay = async (amount) => {
     try {
@@ -93,7 +92,6 @@ const PaymentPage = ({ username }) => {
 
   return (
     <>
-
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -106,8 +104,7 @@ const PaymentPage = ({ username }) => {
         pauseOnHover
         theme="light"
       />
-      <ToastContainer />
-
+      
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
       <div className='cover w-full relative h-[180px]'>
@@ -117,14 +114,15 @@ const PaymentPage = ({ username }) => {
           alt=""
         /> */}
         <div className='rounded-full absolute bottom-[-3rem] right-[44%]'>
-          <img
+          <Image
             className='rounded-full w-[10rem] h-[10rem]'
             src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x4.jpg"
-            alt=""
+            width={160}
+            height={160}
+            alt="Profile Picture"
           />
         </div>
       </div>
-
 
       <div className='h-[100vh] info flex flex-col items-center gap-2'>
         <div className='font-bold text-lg mt-20'> @{username}</div>
@@ -138,7 +136,7 @@ const PaymentPage = ({ username }) => {
               {payments.length === 0 && <li>No payments yet</li>}
               {payments.map((p, i) => (
                 <li key={i} className='my-6 flex gap-2 items-center'>
-                  <img width={30} src="/user.jpg" alt="" />
+                  <Image width={30} height={30} src="/user.jpg" alt="User" />
                   <span>{p.name} Donated <span className='font-bold'>Rs {p.amount / 100}</span> with a message "{p.message}"</span>
                 </li>
               ))}
@@ -162,7 +160,6 @@ const PaymentPage = ({ username }) => {
               >
                 Pay
               </button>
-
             </div>
             <div className='flex gap-2 mt-5'>
               <button className='bg-slate-800 p-3 rounded-lg' onClick={() => pay(1000)}>Pay 10rs</button>
@@ -173,7 +170,7 @@ const PaymentPage = ({ username }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PaymentPage
+export default PaymentPage;

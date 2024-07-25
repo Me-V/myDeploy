@@ -3,12 +3,14 @@ import React from 'react'
 import {useRouter} from 'next/navigation'
 import { useSession ,signIn , signOut } from 'next-auth/react'
 
-const page = () => {
+const Page = () => {
 
     const { data: session } = useSession()
-    if(session){
-        const router = useRouter()
-        router.push('/Dashboard') // for directly redirecting to the dashboard if if we are logged in
+    const router = useRouter() // Moved `useRouter` here to avoid using it inside the condition
+
+    if (session) {
+        router.push('/Dashboard') // for directly redirecting to the dashboard if we are logged in
+        return null; // Added to prevent rendering of the rest of the component
     }
 
     return (
@@ -134,4 +136,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
