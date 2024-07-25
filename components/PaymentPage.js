@@ -7,7 +7,6 @@ import { useSearchParams } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce } from 'react-toastify';
-import Image from 'next/image';
 
 const PaymentPage = ({ username }) => {
   const { data: session } = useSession();
@@ -15,18 +14,10 @@ const PaymentPage = ({ username }) => {
   const [currentUser, setcurrentUser] = useState({});
   const [payments, setPayments] = useState([]);
   const searchParams = useSearchParams();
-
+  
   useEffect(() => {
-    const getData = async () => {
-      let u = await fetchuser(username);
-      setcurrentUser(u);
-
-      let dbpayments = await fetchpayments(username);
-      setPayments(dbpayments);
-    };
-
     getData();
-  }, [username]);
+  }, []);
 
   useEffect(() => {
     if (searchParams.get("paymentdone") === "true") {
@@ -46,6 +37,14 @@ const PaymentPage = ({ username }) => {
 
   const handleChange = (e) => {
     setPaymentform({ ...paymentform, [e.target.name]: e.target.value });
+  };
+
+  const getData = async () => {
+    let u = await fetchuser(username);
+    setcurrentUser(u);
+
+    let dbpayments = await fetchpayments(username);
+    setPayments(dbpayments);
   };
 
   const pay = async (amount) => {
@@ -104,9 +103,8 @@ const PaymentPage = ({ username }) => {
         pauseOnHover
         theme="light"
       />
-      
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-
+  
       <div className='cover w-full relative h-[180px]'>
         {/* <img
           className='object-cover w-full h-[350px]'
@@ -114,21 +112,19 @@ const PaymentPage = ({ username }) => {
           alt=""
         /> */}
         <div className='rounded-full absolute bottom-[-3rem] right-[44%]'>
-          <Image
+          <img
             className='rounded-full w-[10rem] h-[10rem]'
             src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x4.jpg"
-            width={160}
-            height={160}
-            alt="Profile Picture"
+            alt="User"
           />
         </div>
       </div>
-
+  
       <div className='h-[100vh] info flex flex-col items-center gap-2'>
         <div className='font-bold text-lg mt-20'> @{username}</div>
-        <div className='text-slate-400'>Let's Help {username} to get a chai!</div>
+        <div className='text-slate-400'>Let&apos;s Help {username} to get a chai!</div>
         <div>{payments.length} Payments | Rs {payments.reduce((a, b) => a + b.amount / 100, 0)} raised</div>
-
+  
         <div className='payment flex gap-3 w-[80%] mt-11'>
           <div className='supporters w-1/2 bg-slate-900 rounded-lg text-white p-10 overflow-y-auto max-h-[400px] fancy-scrollbar'>
             <h2 className='text-2xl font-bold my-5'>Supporters</h2>
@@ -136,8 +132,8 @@ const PaymentPage = ({ username }) => {
               {payments.length === 0 && <li>No payments yet</li>}
               {payments.map((p, i) => (
                 <li key={i} className='my-6 flex gap-2 items-center'>
-                  <Image width={30} height={30} src="/user.jpg" alt="User" />
-                  <span>{p.name} Donated <span className='font-bold'>Rs {p.amount / 100}</span> with a message "{p.message}"</span>
+                  <img width={30} src="/user.jpg" alt="User" />
+                  <span>{p.name} Donated <span className='font-bold'>Rs {p.amount / 100}</span> with a message &quot;{p.message}&quot;</span>
                 </li>
               ))}
             </ul>
@@ -160,6 +156,7 @@ const PaymentPage = ({ username }) => {
               >
                 Pay
               </button>
+  
             </div>
             <div className='flex gap-2 mt-5'>
               <button className='bg-slate-800 p-3 rounded-lg' onClick={() => pay(1000)}>Pay 10rs</button>
@@ -171,6 +168,7 @@ const PaymentPage = ({ username }) => {
       </div>
     </>
   );
+  
 };
 
 export default PaymentPage;
