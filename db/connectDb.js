@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   
-    const conn = await mongoose.connect(`mongodb://localhost:27017/chai`, {
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
 
       serverSelectionTimeoutMS: 30000,
     });
