@@ -8,6 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce } from 'react-toastify';
+import Footer from './Footer';
 
 const PaymentPage = ({ username }) => {
   const { data: session } = useSession();
@@ -103,14 +104,7 @@ const PaymentPage = ({ username }) => {
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
       <div className='cover w-full bg-black relative h-[180px]'>
-        {/* <Image
-          className='object-cover w-full h-[350px]'
-          src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/2741032/623b5eec9f0c418292a5ed3d237f2ad8/eyJ3IjoxOTIwLCJ3ZSI6MX0%3D/3.jpg?token-time=1722729600&token-hash=c__imrlaDBMzsUFJSloZjiMb6oVkCRy35gghOyOy6a0%3D"
-          alt=""
-          width={1600}
-          height={350}
-        /> */}
-        <div className='rounded-full absolute bottom-[-3rem] right-[46%]'>
+        <div className='rounded-full absolute bottom-[-3rem] left-[calc(50%-50px)]'>
           <Image
             className='rounded-full'
             src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x4.jpg"
@@ -121,13 +115,13 @@ const PaymentPage = ({ username }) => {
         </div>
       </div>
 
-      <div className='h-[100vh] info flex flex-col items-center gap-2'>
-        <div className='font-bold text-lg mt-20'> @{username}</div>
-        <div className='text-slate-400'>Let&apos;s Help {username} to get a chai!</div>
-        <div>{payments.length} Payments | Rs {payments.reduce((a, b) => a + b.amount / 100, 0)} raised</div>
+      <div className='min-h-[calc(100vh-120px)] flex flex-col items-center gap-2 p-4'>
+        <div className='font-bold text-lg mt-20 text-center'> @{username}</div>
+        <div className='text-slate-400 text-center'>Let&apos;s Help {username} to get a chai!</div>
+        <div className='text-center'>{payments.length} Payments | Rs {payments.reduce((a, b) => a + b.amount / 100, 0)} raised</div>
 
-        <div className='payment flex gap-3 w-[80%] mt-11'>
-          <div className='supporters w-1/2 bg-slate-900 rounded-lg text-white p-10 overflow-y-auto max-h-[400px] fancy-scrollbar'>
+        <div className='payment flex flex-col lg:flex-row gap-3 w-full lg:w-[80%] mt-11'>
+          <div className='supporters w-full lg:w-1/2 bg-slate-900 rounded-lg text-white p-4 lg:p-10 overflow-y-auto max-h-[400px] fancy-scrollbar'>
             <h2 className='text-2xl font-bold my-5'>Supporters</h2>
             <ul>
               {payments.length === 0 && <li>No payments yet</li>}
@@ -139,7 +133,7 @@ const PaymentPage = ({ username }) => {
               ))}
             </ul>
           </div>
-          <div className='makePayment w-1/2 bg-slate-900 rounded-lg text-white p-10'>
+          <div className='makePayment w-full lg:w-1/2 bg-slate-900 rounded-lg text-white p-4 lg:p-10'>
             <h2 className='text-2xl font-bold my-5'>Make Payment</h2>
             <div className="flex gap-2 flex-col">
               <input onChange={handleChange} name="name" value={paymentform.name || ''} type="text" className='w-full p-3 rounded-lg bg-slate-800' placeholder="Enter Your Name" />
@@ -157,7 +151,6 @@ const PaymentPage = ({ username }) => {
               >
                 Pay
               </button>
-
             </div>
             <div className='flex gap-2 mt-5'>
               <button className='bg-slate-800 p-3 rounded-lg' onClick={() => pay(1000)}>Pay 10rs</button>
@@ -167,6 +160,7 @@ const PaymentPage = ({ username }) => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

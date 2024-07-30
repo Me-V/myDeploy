@@ -77,12 +77,12 @@ const Dashboard = () => {
           <div className="mb-5">
             <label htmlFor="name" className="block text-gray-700 font-bold mb-1">Name</label>
             <input
-              type="text"
+              type="text" 
               id="name"
               name="name"
               value={form.name}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-black"
+              className="w-full px-4 bg-white py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-black"
               required
             />
           </div>
@@ -95,7 +95,7 @@ const Dashboard = () => {
               name="email"
               value={form.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-black"
+              className="w-full px-4 bg-white py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-black"
               required
             />
           </div>
@@ -108,7 +108,7 @@ const Dashboard = () => {
               name="username"
               value={form.username}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-black"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-black"
               required
             />
           </div>
@@ -121,7 +121,7 @@ const Dashboard = () => {
               name="razorpayid"
               value={form.razorpayid}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-black"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-black"
               required
             />
           </div>
@@ -134,7 +134,7 @@ const Dashboard = () => {
               name="razorpaysecret"
               value={form.razorpaysecret}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-black"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-black"
               required
             />
           </div>
