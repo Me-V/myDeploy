@@ -29,9 +29,9 @@ const About = () => {
                 <section className="mb-16">
                     <h2 className="text-4xl font-semibold mb-6 text-gray-200">Meet the Team</h2>
                     <div className="flex flex-wrap justify-center">
-                        <div className="w-72 p-6 m-4 bg-gray-800 rounded-xl shadow-xl transition-transform transform hover:scale-105">
+                        <div className="w-full md:w-1/3 lg:w-1/4 xl:w-1/5 p-6 m-4 bg-gray-800 rounded-xl shadow-xl transition-transform transform hover:scale-105">
                             <Image
-                                className='rounded-full w-32 h-32 mx-auto mb-4 border-4 border-blue-500'
+                                className="rounded-full w-32 h-32 mx-auto mb-4 border-4 border-blue-500"
                                 src="/vasu.jpg"
                                 alt="Vasu Sharma"
                                 width={128}

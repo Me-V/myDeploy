@@ -20,7 +20,7 @@ const Page = () => {
 
             <div>
 
-                <div className="flex flex-col  items-center gap-2 min-h-screen p-10">
+                <div className="flex flex-col  items-center gap-2 min-h-[40vh] p-10">
 
 
                     <button

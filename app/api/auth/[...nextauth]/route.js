@@ -9,8 +9,8 @@ export const authoptions = NextAuth({
   providers: [
     // OAuth authentication providers...
     GitHubProvider({
-        clientId: process.env.GITHUB_ID,
-        clientSecret: process.env.GITHUB_SECRET
+        clientId: process.env.NEXTAUTH_GITHUB_ID,
+        clientSecret: process.env.NEXTAUTH_GITHUB_SECRET
     }),
   ],
   callbacks: {

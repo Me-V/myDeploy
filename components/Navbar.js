@@ -9,7 +9,7 @@ const Navbar = () => {
   const [showdropdown, setShowdropdown] = useState(false);
 
   return (
-    <nav className='bg-blue-950 text-white flex justify-between items-center px-4 h-16'>
+    <nav className=' text-white flex justify-between items-center px-4 h-16'>
       <Link href="/" className='logo font-bold flex justify-center items-center gap-4'>
         <Image src="/giphy.gif" width={30} height={30} alt="Logo" />
         <span>Get Me A Chai</span>
